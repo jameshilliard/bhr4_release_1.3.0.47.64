@@ -1,0 +1,222 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="libudev-udev-queue">
+<refmeta>
+<refentrytitle role="top_of_page" id="libudev-udev-queue.top_of_page">udev_queue</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>LIBUDEV Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>udev_queue</refname>
+<refpurpose>access to currently active events</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="libudev-udev-queue.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+struct              <link linkend="udev-queue">udev_queue</link>;
+struct <link linkend="udev-queue">udev_queue</link> * <link linkend="udev-queue-ref">udev_queue_ref</link>                      (<link linkend="struct-udev-queue">struct udev_queue</link> *udev_queue);
+<link linkend="void">void</link>                <link linkend="udev-queue-unref">udev_queue_unref</link>                    (<link linkend="struct-udev-queue">struct udev_queue</link> *udev_queue);
+struct <link linkend="udev">udev</link> *       <link linkend="udev-queue-get-udev">udev_queue_get_udev</link>                 (<link linkend="struct-udev-queue">struct udev_queue</link> *udev_queue);
+struct <link linkend="udev-queue">udev_queue</link> * <link linkend="udev-queue-new">udev_queue_new</link>                      (<link linkend="struct-udev">struct udev</link> *udev);
+<link linkend="int">int</link>                 <link linkend="udev-queue-get-udev-is-active">udev_queue_get_udev_is_active</link>       (<link linkend="struct-udev-queue">struct udev_queue</link> *udev_queue);
+<link linkend="int">int</link>                 <link linkend="udev-queue-get-queue-is-empty">udev_queue_get_queue_is_empty</link>       (<link linkend="struct-udev-queue">struct udev_queue</link> *udev_queue);
+<link linkend="int">int</link>                 <link linkend="udev-queue-get-seqnum-is-finished">udev_queue_get_seqnum_is_finished</link>   (<link linkend="struct-udev-queue">struct udev_queue</link> *udev_queue,
+                                                         long <link linkend="int">int</link> seqnum);
+<link linkend="int">int</link>                 <link linkend="udev-queue-get-seqnum-sequence-is-finished">udev_queue_get_seqnum_sequence_is_finished</link>
+                                                        (<link linkend="struct-udev-queue">struct udev_queue</link> *udev_queue,
+                                                         long <link linkend="int">int</link> start,
+                                                         long <link linkend="int">int</link> end);
+struct <link linkend="udev-list-entry">udev_list_entry</link> * <link linkend="udev-queue-get-queued-list-entry">udev_queue_get_queued_list_entry</link>
+                                                        (<link linkend="struct-udev-queue">struct udev_queue</link> *udev_queue);
+struct <link linkend="udev-list-entry">udev_list_entry</link> * <link linkend="udev-queue-get-failed-list-entry">udev_queue_get_failed_list_entry</link>
+                                                        (<link linkend="struct-udev-queue">struct udev_queue</link> *udev_queue);
+</synopsis>
+</refsynopsisdiv>
+
+
+
+
+
+
+
+
+
+<refsect1 id="libudev-udev-queue.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+The udev daemon processes event asynchronously. All events which do not have
+interdependencies are run in parallel. This exports the current state of the
+event processing queue, and the currently event sequence numbers from the kernel
+and the udev daemon.</para>
+<para>
+</para>
+</refsect1>
+
+<refsect1 id="libudev-udev-queue.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="udev-queue" role="struct">
+<title>struct udev_queue</title>
+<indexterm zone="udev-queue"><primary sortas="queue">udev_queue</primary></indexterm><programlisting>struct udev_queue;</programlisting>
+<para>
+Opaque object representing the current event queue in the udev daemon.</para>
+<para>
+</para></refsect2>
+<refsect2 id="udev-queue-ref" role="function">
+<title>udev_queue_ref ()</title>
+<indexterm zone="udev-queue-ref"><primary sortas="queue_ref">udev_queue_ref</primary></indexterm><programlisting>struct <link linkend="udev-queue">udev_queue</link> * udev_queue_ref                      (<link linkend="struct-udev-queue">struct udev_queue</link> *udev_queue);</programlisting>
+<para>
+Take a reference of a udev queue context.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>udev_queue</parameter>&#160;:</term>
+<listitem><simpara> udev queue context
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> the same udev queue context.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="udev-queue-unref" role="function">
+<title>udev_queue_unref ()</title>
+<indexterm zone="udev-queue-unref"><primary sortas="queue_unref">udev_queue_unref</primary></indexterm><programlisting><link linkend="void">void</link>                udev_queue_unref                    (<link linkend="struct-udev-queue">struct udev_queue</link> *udev_queue);</programlisting>
+<para>
+Drop a reference of a udev queue context. If the refcount reaches zero,
+the resources of the queue context will be released.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>udev_queue</parameter>&#160;:</term>
+<listitem><simpara> udev queue context
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="udev-queue-get-udev" role="function">
+<title>udev_queue_get_udev ()</title>
+<indexterm zone="udev-queue-get-udev"><primary sortas="queue_get_udev">udev_queue_get_udev</primary></indexterm><programlisting>struct <link linkend="udev">udev</link> *       udev_queue_get_udev                 (<link linkend="struct-udev-queue">struct udev_queue</link> *udev_queue);</programlisting>
+<para>
+Retrieve the udev library context the queue context was created with.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>udev_queue</parameter>&#160;:</term>
+<listitem><simpara> udev queue context
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> the udev library context.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="udev-queue-new" role="function">
+<title>udev_queue_new ()</title>
+<indexterm zone="udev-queue-new"><primary sortas="queue_new">udev_queue_new</primary></indexterm><programlisting>struct <link linkend="udev-queue">udev_queue</link> * udev_queue_new                      (<link linkend="struct-udev">struct udev</link> *udev);</programlisting>
+<para>
+The initial refcount is 1, and needs to be decremented to
+release the resources of the udev queue context.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>udev</parameter>&#160;:</term>
+<listitem><simpara> udev library context
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> the udev queue context, or <link linkend="NULL--CAPS"><type>NULL</type></link> on error.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="udev-queue-get-udev-is-active" role="function">
+<title>udev_queue_get_udev_is_active ()</title>
+<indexterm zone="udev-queue-get-udev-is-active"><primary sortas="queue_get_udev_is_active">udev_queue_get_udev_is_active</primary></indexterm><programlisting><link linkend="int">int</link>                 udev_queue_get_udev_is_active       (<link linkend="struct-udev-queue">struct udev_queue</link> *udev_queue);</programlisting>
+<para>
+</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>udev_queue</parameter>&#160;:</term>
+<listitem><simpara> udev queue context
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> a flag indicating if udev is active.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="udev-queue-get-queue-is-empty" role="function">
+<title>udev_queue_get_queue_is_empty ()</title>
+<indexterm zone="udev-queue-get-queue-is-empty"><primary sortas="queue_get_queue_is_empty">udev_queue_get_queue_is_empty</primary></indexterm><programlisting><link linkend="int">int</link>                 udev_queue_get_queue_is_empty       (<link linkend="struct-udev-queue">struct udev_queue</link> *udev_queue);</programlisting>
+<para>
+</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>udev_queue</parameter>&#160;:</term>
+<listitem><simpara> udev queue context
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> a flag indicating if udev is currently handling events.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="udev-queue-get-seqnum-is-finished" role="function">
+<title>udev_queue_get_seqnum_is_finished ()</title>
+<indexterm zone="udev-queue-get-seqnum-is-finished"><primary sortas="queue_get_seqnum_is_finished">udev_queue_get_seqnum_is_finished</primary></indexterm><programlisting><link linkend="int">int</link>                 udev_queue_get_seqnum_is_finished   (<link linkend="struct-udev-queue">struct udev_queue</link> *udev_queue,
+                                                         long <link linkend="int">int</link> seqnum);</programlisting>
+<para>
+</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>udev_queue</parameter>&#160;:</term>
+<listitem><simpara> udev queue context
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>seqnum</parameter>&#160;:</term>
+<listitem><simpara> sequence number
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> a flag indicating if the given sequence number is handled.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="udev-queue-get-seqnum-sequence-is-finished" role="function">
+<title>udev_queue_get_seqnum_sequence_is_finished ()</title>
+<indexterm zone="udev-queue-get-seqnum-sequence-is-finished"><primary sortas="queue_get_seqnum_sequence_is_finished">udev_queue_get_seqnum_sequence_is_finished</primary></indexterm><programlisting><link linkend="int">int</link>                 udev_queue_get_seqnum_sequence_is_finished
+                                                        (<link linkend="struct-udev-queue">struct udev_queue</link> *udev_queue,
+                                                         long <link linkend="int">int</link> start,
+                                                         long <link linkend="int">int</link> end);</programlisting>
+<para>
+</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>udev_queue</parameter>&#160;:</term>
+<listitem><simpara> udev queue context
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>start</parameter>&#160;:</term>
+<listitem><simpara> first event sequence number
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>end</parameter>&#160;:</term>
+<listitem><simpara> last event sequence number
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> if any of the sequence numbers in the given range is currently active.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="udev-queue-get-queued-list-entry" role="function">
+<title>udev_queue_get_queued_list_entry ()</title>
+<indexterm zone="udev-queue-get-queued-list-entry"><primary sortas="queue_get_queued_list_entry">udev_queue_get_queued_list_entry</primary></indexterm><programlisting>struct <link linkend="udev-list-entry">udev_list_entry</link> * udev_queue_get_queued_list_entry
+                                                        (<link linkend="struct-udev-queue">struct udev_queue</link> *udev_queue);</programlisting>
+<para>
+</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>udev_queue</parameter>&#160;:</term>
+<listitem><simpara> udev queue context
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> the first entry of the list of queued events.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="udev-queue-get-failed-list-entry" role="function">
+<title>udev_queue_get_failed_list_entry ()</title>
+<indexterm zone="udev-queue-get-failed-list-entry"><primary sortas="queue_get_failed_list_entry">udev_queue_get_failed_list_entry</primary></indexterm><programlisting>struct <link linkend="udev-list-entry">udev_list_entry</link> * udev_queue_get_failed_list_entry
+                                                        (<link linkend="struct-udev-queue">struct udev_queue</link> *udev_queue);</programlisting>
+<para>
+</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>udev_queue</parameter>&#160;:</term>
+<listitem><simpara> udev queue context
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> the first entry of the list of recorded failed events.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

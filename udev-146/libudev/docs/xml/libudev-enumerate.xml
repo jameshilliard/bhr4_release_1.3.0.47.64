@@ -1,0 +1,287 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="libudev-udev-enumerate">
+<refmeta>
+<refentrytitle role="top_of_page" id="libudev-udev-enumerate.top_of_page">udev_enumerate</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>LIBUDEV Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>udev_enumerate</refname>
+<refpurpose>lookup and sort sys devices</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="libudev-udev-enumerate.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+struct              <link linkend="udev-enumerate">udev_enumerate</link>;
+struct <link linkend="udev-enumerate">udev_enumerate</link> * <link linkend="udev-enumerate-ref">udev_enumerate_ref</link>              (<link linkend="struct-udev-enumerate">struct udev_enumerate</link> *udev_enumerate);
+<link linkend="void">void</link>                <link linkend="udev-enumerate-unref">udev_enumerate_unref</link>                (<link linkend="struct-udev-enumerate">struct udev_enumerate</link> *udev_enumerate);
+struct <link linkend="udev">udev</link> *       <link linkend="udev-enumerate-get-udev">udev_enumerate_get_udev</link>             (<link linkend="struct-udev-enumerate">struct udev_enumerate</link> *udev_enumerate);
+struct <link linkend="udev-enumerate">udev_enumerate</link> * <link linkend="udev-enumerate-new">udev_enumerate_new</link>              (<link linkend="struct-udev">struct udev</link> *udev);
+<link linkend="int">int</link>                 <link linkend="udev-enumerate-add-match-subsystem">udev_enumerate_add_match_subsystem</link>  (<link linkend="struct-udev-enumerate">struct udev_enumerate</link> *udev_enumerate,
+                                                         const <link linkend="char">char</link> *subsystem);
+<link linkend="int">int</link>                 <link linkend="udev-enumerate-add-nomatch-subsystem">udev_enumerate_add_nomatch_subsystem</link>
+                                                        (<link linkend="struct-udev-enumerate">struct udev_enumerate</link> *udev_enumerate,
+                                                         const <link linkend="char">char</link> *subsystem);
+<link linkend="int">int</link>                 <link linkend="udev-enumerate-add-match-sysattr">udev_enumerate_add_match_sysattr</link>    (<link linkend="struct-udev-enumerate">struct udev_enumerate</link> *udev_enumerate,
+                                                         const <link linkend="char">char</link> *sysattr,
+                                                         const <link linkend="char">char</link> *value);
+<link linkend="int">int</link>                 <link linkend="udev-enumerate-add-nomatch-sysattr">udev_enumerate_add_nomatch_sysattr</link>  (<link linkend="struct-udev-enumerate">struct udev_enumerate</link> *udev_enumerate,
+                                                         const <link linkend="char">char</link> *sysattr,
+                                                         const <link linkend="char">char</link> *value);
+<link linkend="int">int</link>                 <link linkend="udev-enumerate-add-match-property">udev_enumerate_add_match_property</link>   (<link linkend="struct-udev-enumerate">struct udev_enumerate</link> *udev_enumerate,
+                                                         const <link linkend="char">char</link> *property,
+                                                         const <link linkend="char">char</link> *value);
+<link linkend="int">int</link>                 <link linkend="udev-enumerate-add-syspath">udev_enumerate_add_syspath</link>          (<link linkend="struct-udev-enumerate">struct udev_enumerate</link> *udev_enumerate,
+                                                         const <link linkend="char">char</link> *syspath);
+<link linkend="int">int</link>                 <link linkend="udev-enumerate-scan-devices">udev_enumerate_scan_devices</link>         (<link linkend="struct-udev-enumerate">struct udev_enumerate</link> *udev_enumerate);
+<link linkend="int">int</link>                 <link linkend="udev-enumerate-scan-subsystems">udev_enumerate_scan_subsystems</link>      (<link linkend="struct-udev-enumerate">struct udev_enumerate</link> *udev_enumerate);
+struct <link linkend="udev-list-entry">udev_list_entry</link> * <link linkend="udev-enumerate-get-list-entry">udev_enumerate_get_list_entry</link>  (<link linkend="struct-udev-enumerate">struct udev_enumerate</link> *udev_enumerate);
+</synopsis>
+</refsynopsisdiv>
+
+
+
+
+
+
+
+
+
+<refsect1 id="libudev-udev-enumerate.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+Lookup devices in the sys filesystem, filter devices by properties,
+and return a sorted list of devices.</para>
+<para>
+</para>
+</refsect1>
+
+<refsect1 id="libudev-udev-enumerate.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="udev-enumerate" role="struct">
+<title>struct udev_enumerate</title>
+<indexterm zone="udev-enumerate"><primary sortas="enumerate">udev_enumerate</primary></indexterm><programlisting>struct udev_enumerate;</programlisting>
+<para>
+Opaque object representing one device lookup/sort context.</para>
+<para>
+</para></refsect2>
+<refsect2 id="udev-enumerate-ref" role="function">
+<title>udev_enumerate_ref ()</title>
+<indexterm zone="udev-enumerate-ref"><primary sortas="enumerate_ref">udev_enumerate_ref</primary></indexterm><programlisting>struct <link linkend="udev-enumerate">udev_enumerate</link> * udev_enumerate_ref              (<link linkend="struct-udev-enumerate">struct udev_enumerate</link> *udev_enumerate);</programlisting>
+<para>
+Take a reference of a enumeration context.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>udev_enumerate</parameter>&#160;:</term>
+<listitem><simpara> context
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> the passed enumeration context
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="udev-enumerate-unref" role="function">
+<title>udev_enumerate_unref ()</title>
+<indexterm zone="udev-enumerate-unref"><primary sortas="enumerate_unref">udev_enumerate_unref</primary></indexterm><programlisting><link linkend="void">void</link>                udev_enumerate_unref                (<link linkend="struct-udev-enumerate">struct udev_enumerate</link> *udev_enumerate);</programlisting>
+<para>
+Drop a reference of an enumeration context. If the refcount reaches zero,
+all resources of the enumeration context will be released.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>udev_enumerate</parameter>&#160;:</term>
+<listitem><simpara> context
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="udev-enumerate-get-udev" role="function">
+<title>udev_enumerate_get_udev ()</title>
+<indexterm zone="udev-enumerate-get-udev"><primary sortas="enumerate_get_udev">udev_enumerate_get_udev</primary></indexterm><programlisting>struct <link linkend="udev">udev</link> *       udev_enumerate_get_udev             (<link linkend="struct-udev-enumerate">struct udev_enumerate</link> *udev_enumerate);</programlisting>
+<para>
+</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>udev_enumerate</parameter>&#160;:</term>
+<listitem><simpara> context
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> the udev library context.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="udev-enumerate-new" role="function">
+<title>udev_enumerate_new ()</title>
+<indexterm zone="udev-enumerate-new"><primary sortas="enumerate_new">udev_enumerate_new</primary></indexterm><programlisting>struct <link linkend="udev-enumerate">udev_enumerate</link> * udev_enumerate_new              (<link linkend="struct-udev">struct udev</link> *udev);</programlisting>
+<para>
+</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>udev</parameter>&#160;:</term>
+<listitem><simpara> udev library context
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> an enumeration context
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="udev-enumerate-add-match-subsystem" role="function">
+<title>udev_enumerate_add_match_subsystem ()</title>
+<indexterm zone="udev-enumerate-add-match-subsystem"><primary sortas="enumerate_add_match_subsystem">udev_enumerate_add_match_subsystem</primary></indexterm><programlisting><link linkend="int">int</link>                 udev_enumerate_add_match_subsystem  (<link linkend="struct-udev-enumerate">struct udev_enumerate</link> *udev_enumerate,
+                                                         const <link linkend="char">char</link> *subsystem);</programlisting>
+<para>
+</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>udev_enumerate</parameter>&#160;:</term>
+<listitem><simpara> context
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>subsystem</parameter>&#160;:</term>
+<listitem><simpara> filter for a subsystem of the device to include in the list
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> 0 on success, otherwise a negative error value.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="udev-enumerate-add-nomatch-subsystem" role="function">
+<title>udev_enumerate_add_nomatch_subsystem ()</title>
+<indexterm zone="udev-enumerate-add-nomatch-subsystem"><primary sortas="enumerate_add_nomatch_subsystem">udev_enumerate_add_nomatch_subsystem</primary></indexterm><programlisting><link linkend="int">int</link>                 udev_enumerate_add_nomatch_subsystem
+                                                        (<link linkend="struct-udev-enumerate">struct udev_enumerate</link> *udev_enumerate,
+                                                         const <link linkend="char">char</link> *subsystem);</programlisting>
+<para>
+</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>udev_enumerate</parameter>&#160;:</term>
+<listitem><simpara> context
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>subsystem</parameter>&#160;:</term>
+<listitem><simpara> filter for a subsystem of the device to exclude from the list
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> 0 on success, otherwise a negative error value.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="udev-enumerate-add-match-sysattr" role="function">
+<title>udev_enumerate_add_match_sysattr ()</title>
+<indexterm zone="udev-enumerate-add-match-sysattr"><primary sortas="enumerate_add_match_sysattr">udev_enumerate_add_match_sysattr</primary></indexterm><programlisting><link linkend="int">int</link>                 udev_enumerate_add_match_sysattr    (<link linkend="struct-udev-enumerate">struct udev_enumerate</link> *udev_enumerate,
+                                                         const <link linkend="char">char</link> *sysattr,
+                                                         const <link linkend="char">char</link> *value);</programlisting>
+<para>
+</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>udev_enumerate</parameter>&#160;:</term>
+<listitem><simpara> context
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>sysattr</parameter>&#160;:</term>
+<listitem><simpara> filter for a sys attribute at the device to include in the list
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>value</parameter>&#160;:</term>
+<listitem><simpara> optional value of the sys attribute
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> 0 on success, otherwise a negative error value.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="udev-enumerate-add-nomatch-sysattr" role="function">
+<title>udev_enumerate_add_nomatch_sysattr ()</title>
+<indexterm zone="udev-enumerate-add-nomatch-sysattr"><primary sortas="enumerate_add_nomatch_sysattr">udev_enumerate_add_nomatch_sysattr</primary></indexterm><programlisting><link linkend="int">int</link>                 udev_enumerate_add_nomatch_sysattr  (<link linkend="struct-udev-enumerate">struct udev_enumerate</link> *udev_enumerate,
+                                                         const <link linkend="char">char</link> *sysattr,
+                                                         const <link linkend="char">char</link> *value);</programlisting>
+<para>
+</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>udev_enumerate</parameter>&#160;:</term>
+<listitem><simpara> context
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>sysattr</parameter>&#160;:</term>
+<listitem><simpara> filter for a sys attribute at the device to exclude from the list
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>value</parameter>&#160;:</term>
+<listitem><simpara> optional value of the sys attribute
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> 0 on success, otherwise a negative error value.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="udev-enumerate-add-match-property" role="function">
+<title>udev_enumerate_add_match_property ()</title>
+<indexterm zone="udev-enumerate-add-match-property"><primary sortas="enumerate_add_match_property">udev_enumerate_add_match_property</primary></indexterm><programlisting><link linkend="int">int</link>                 udev_enumerate_add_match_property   (<link linkend="struct-udev-enumerate">struct udev_enumerate</link> *udev_enumerate,
+                                                         const <link linkend="char">char</link> *property,
+                                                         const <link linkend="char">char</link> *value);</programlisting>
+<para>
+</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>udev_enumerate</parameter>&#160;:</term>
+<listitem><simpara> context
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>property</parameter>&#160;:</term>
+<listitem><simpara> filter for a property of the device to include in the list
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>value</parameter>&#160;:</term>
+<listitem><simpara> value of the property
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> 0 on success, otherwise a negative error value.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="udev-enumerate-add-syspath" role="function">
+<title>udev_enumerate_add_syspath ()</title>
+<indexterm zone="udev-enumerate-add-syspath"><primary sortas="enumerate_add_syspath">udev_enumerate_add_syspath</primary></indexterm><programlisting><link linkend="int">int</link>                 udev_enumerate_add_syspath          (<link linkend="struct-udev-enumerate">struct udev_enumerate</link> *udev_enumerate,
+                                                         const <link linkend="char">char</link> *syspath);</programlisting>
+<para>
+Add a device to the list of devices, to retrieve it back sorted in dependency order.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>udev_enumerate</parameter>&#160;:</term>
+<listitem><simpara> context
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>syspath</parameter>&#160;:</term>
+<listitem><simpara> path of a device
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> 0 on success, otherwise a negative error value.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="udev-enumerate-scan-devices" role="function">
+<title>udev_enumerate_scan_devices ()</title>
+<indexterm zone="udev-enumerate-scan-devices"><primary sortas="enumerate_scan_devices">udev_enumerate_scan_devices</primary></indexterm><programlisting><link linkend="int">int</link>                 udev_enumerate_scan_devices         (<link linkend="struct-udev-enumerate">struct udev_enumerate</link> *udev_enumerate);</programlisting>
+<para>
+</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>udev_enumerate</parameter>&#160;:</term>
+<listitem><simpara> udev enumeration context
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> 0 on success, otherwise a negative error value.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="udev-enumerate-scan-subsystems" role="function">
+<title>udev_enumerate_scan_subsystems ()</title>
+<indexterm zone="udev-enumerate-scan-subsystems"><primary sortas="enumerate_scan_subsystems">udev_enumerate_scan_subsystems</primary></indexterm><programlisting><link linkend="int">int</link>                 udev_enumerate_scan_subsystems      (<link linkend="struct-udev-enumerate">struct udev_enumerate</link> *udev_enumerate);</programlisting>
+<para>
+</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>udev_enumerate</parameter>&#160;:</term>
+<listitem><simpara> udev enumeration context
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> 0 on success, otherwise a negative error value.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="udev-enumerate-get-list-entry" role="function">
+<title>udev_enumerate_get_list_entry ()</title>
+<indexterm zone="udev-enumerate-get-list-entry"><primary sortas="enumerate_get_list_entry">udev_enumerate_get_list_entry</primary></indexterm><programlisting>struct <link linkend="udev-list-entry">udev_list_entry</link> * udev_enumerate_get_list_entry  (<link linkend="struct-udev-enumerate">struct udev_enumerate</link> *udev_enumerate);</programlisting>
+<para>
+</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>udev_enumerate</parameter>&#160;:</term>
+<listitem><simpara> context
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> the first entry of the sorted list of device paths.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

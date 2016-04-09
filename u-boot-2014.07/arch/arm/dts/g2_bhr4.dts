@@ -1,0 +1,16 @@
+/dts-v1/;
+
+#include "skeleton.dtsi"
+
+/ {
+        model = "bhr4";
+        compatible = "cortina,g2";
+
+        signature {
+                key-kernel {
+                        required = "conf";
+                        algo = "sha1,rsa2048";
+                        key-name-hint = "kernel";
+                };
+        };
+};

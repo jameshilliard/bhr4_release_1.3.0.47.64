@@ -1,0 +1,11 @@
+prefix=
+exec_prefix=
+libdir=${exec_prefix}/lib
+includedir=/include
+
+Name: libudev
+Description: Library to access udev device information
+Version: 146
+Libs: -L${libdir} -ludev
+Libs.private: 
+Cflags: -I${includedir}

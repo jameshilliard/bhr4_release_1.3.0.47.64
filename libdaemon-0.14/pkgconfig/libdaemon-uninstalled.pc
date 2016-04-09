@@ -1,0 +1,8 @@
+libdir=/home/jenkins/slave/workspace/BHR4_Release_Build_FiOS1.3_PROD/output/bhr4/libdaemon-0.14/libdaemon/.libs
+includedir=/home/jenkins/slave/workspace/BHR4_Release_Build_FiOS1.3_PROD/output/bhr4/libdaemon-0.14
+
+Name: libdaemon
+Description: a lightweight C library that eases the writing of UNIX daemons
+Version: 0.14
+Libs: -L${libdir} -R${libdir} -ldaemon
+Cflags: -D_REENTRANT -I${includedir}

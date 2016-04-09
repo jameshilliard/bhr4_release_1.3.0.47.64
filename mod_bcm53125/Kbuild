@@ -1,0 +1,3 @@
+obj-m := mod_bcm53125.o
+mod_bcm53125-y := bcm53125.o bcm53125_spi_functions.o
+EXTRA_CFLAGS := 

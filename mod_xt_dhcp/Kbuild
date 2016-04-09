@@ -1,0 +1,3 @@
+obj-m := mod_xt_dhcp.o
+mod_xt_dhcp-y := xt_dhcp.o xt_dhcp_bl.o
+EXTRA_CFLAGS := -Wno-comment

@@ -1,0 +1,24 @@
+LIBNETFILTER_ACCT_1.0 {
+global:
+  nfacct_alloc;
+  nfacct_free;
+  nfacct_attr_set;
+  nfacct_attr_set_str;
+  nfacct_attr_set_u64;
+  nfacct_attr_unset;
+  nfacct_attr_get;
+  nfacct_attr_get_str;
+  nfacct_attr_get_u64;
+  nfacct_nlmsg_build_hdr;
+  nfacct_nlmsg_build_payload;
+  nfacct_nlmsg_parse_payload;
+  /* nfacct_snprintf prototype was modified, new version in 1.1.
+     I decided not to keep the old symbol compatibility. See git log
+     for more information. */
+
+local: *;
+};
+
+LIBNETFILTER_ACCT_1.1 {
+  nfacct_snprintf;
+} LIBNETFILTER_ACCT_1.0;

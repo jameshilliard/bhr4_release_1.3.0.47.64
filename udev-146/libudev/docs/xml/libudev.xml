@@ -1,0 +1,218 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="libudev-udev">
+<refmeta>
+<refentrytitle role="top_of_page" id="libudev-udev.top_of_page">udev</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>LIBUDEV Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>udev</refname>
+<refpurpose>libudev context</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="libudev-udev.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+struct              <link linkend="udev">udev</link>;
+struct <link linkend="udev">udev</link> *       <link linkend="udev-ref">udev_ref</link>                            (<link linkend="struct-udev">struct udev</link> *udev);
+<link linkend="void">void</link>                <link linkend="udev-unref">udev_unref</link>                          (<link linkend="struct-udev">struct udev</link> *udev);
+struct <link linkend="udev">udev</link> *       <link linkend="udev-new">udev_new</link>                            (void);
+<link linkend="void">void</link>                <link linkend="udev-set-log-fn">udev_set_log_fn</link>                     (<link linkend="struct-udev">struct udev</link> *udev,
+                                                         <link linkend="void">void</link> (log_fnstruct udev *udev,int priority, const char *file, int line, const char *fn,const char *format, va_list args) ());
+<link linkend="int">int</link>                 <link linkend="udev-get-log-priority">udev_get_log_priority</link>               (<link linkend="struct-udev">struct udev</link> *udev);
+<link linkend="void">void</link>                <link linkend="udev-set-log-priority">udev_set_log_priority</link>               (<link linkend="struct-udev">struct udev</link> *udev,
+                                                         <link linkend="int">int</link> priority);
+const <link linkend="char">char</link> *        <link linkend="udev-get-sys-path">udev_get_sys_path</link>                   (<link linkend="struct-udev">struct udev</link> *udev);
+const <link linkend="char">char</link> *        <link linkend="udev-get-dev-path">udev_get_dev_path</link>                   (<link linkend="struct-udev">struct udev</link> *udev);
+<link linkend="void">void</link> *              <link linkend="udev-get-userdata">udev_get_userdata</link>                   (<link linkend="struct-udev">struct udev</link> *udev);
+<link linkend="void">void</link>                <link linkend="udev-set-userdata">udev_set_userdata</link>                   (<link linkend="struct-udev">struct udev</link> *udev,
+                                                         <link linkend="void">void</link> *userdata);
+</synopsis>
+</refsynopsisdiv>
+
+
+
+
+
+
+
+
+
+<refsect1 id="libudev-udev.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+The context contains the default values read from the udev config file,
+and is passed to all library operations.</para>
+<para>
+</para>
+</refsect1>
+
+<refsect1 id="libudev-udev.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="udev" role="struct">
+<title>struct udev</title>
+<indexterm zone="udev"><primary sortas="">udev</primary></indexterm><programlisting>struct udev;</programlisting>
+<para>
+Opaque object representing the library context.</para>
+<para>
+</para></refsect2>
+<refsect2 id="udev-ref" role="function">
+<title>udev_ref ()</title>
+<indexterm zone="udev-ref"><primary sortas="ref">udev_ref</primary></indexterm><programlisting>struct <link linkend="udev">udev</link> *       udev_ref                            (<link linkend="struct-udev">struct udev</link> *udev);</programlisting>
+<para>
+Take a reference of the udev library context.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>udev</parameter>&#160;:</term>
+<listitem><simpara> udev library context
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> the passed udev library context
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="udev-unref" role="function">
+<title>udev_unref ()</title>
+<indexterm zone="udev-unref"><primary sortas="unref">udev_unref</primary></indexterm><programlisting><link linkend="void">void</link>                udev_unref                          (<link linkend="struct-udev">struct udev</link> *udev);</programlisting>
+<para>
+Drop a reference of the udev library context. If the refcount
+reaches zero, the resources of the context will be released.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>udev</parameter>&#160;:</term>
+<listitem><simpara> udev library context
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="udev-new" role="function">
+<title>udev_new ()</title>
+<indexterm zone="udev-new"><primary sortas="new">udev_new</primary></indexterm><programlisting>struct <link linkend="udev">udev</link> *       udev_new                            (void);</programlisting>
+<para>
+Create udev library context. This reads the udev configuration
+file, and fills in the default values.
+</para>
+<para>
+The initial refcount is 1, and needs to be decremented to
+release the resources of the udev library context.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> a new udev library context
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="udev-set-log-fn" role="function">
+<title>udev_set_log_fn ()</title>
+<indexterm zone="udev-set-log-fn"><primary sortas="set_log_fn">udev_set_log_fn</primary></indexterm><programlisting><link linkend="void">void</link>                udev_set_log_fn                     (<link linkend="struct-udev">struct udev</link> *udev,
+                                                         <link linkend="void">void</link> (log_fnstruct udev *udev,int priority, const char *file, int line, const char *fn,const char *format, va_list args) ());</programlisting>
+<para>
+The built-in logging writes to stderr. It can be
+overridden by a custom function, to plug log messages
+into the users' logging functionality.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>udev</parameter>&#160;:</term>
+<listitem><simpara> udev library context
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>log_fn</parameter>&#160;:</term>
+<listitem><simpara> function to be called for logging messages
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="udev-get-log-priority" role="function">
+<title>udev_get_log_priority ()</title>
+<indexterm zone="udev-get-log-priority"><primary sortas="get_log_priority">udev_get_log_priority</primary></indexterm><programlisting><link linkend="int">int</link>                 udev_get_log_priority               (<link linkend="struct-udev">struct udev</link> *udev);</programlisting>
+<para>
+The initial syslog priority is read from the udev config file
+at startup.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>udev</parameter>&#160;:</term>
+<listitem><simpara> udev library context
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> the current syslog priority
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="udev-set-log-priority" role="function">
+<title>udev_set_log_priority ()</title>
+<indexterm zone="udev-set-log-priority"><primary sortas="set_log_priority">udev_set_log_priority</primary></indexterm><programlisting><link linkend="void">void</link>                udev_set_log_priority               (<link linkend="struct-udev">struct udev</link> *udev,
+                                                         <link linkend="int">int</link> priority);</programlisting>
+<para>
+Set the current syslog priority. The value controls which messages
+are send to syslog.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>udev</parameter>&#160;:</term>
+<listitem><simpara> udev library context
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>priority</parameter>&#160;:</term>
+<listitem><simpara> the new syslog priority
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="udev-get-sys-path" role="function">
+<title>udev_get_sys_path ()</title>
+<indexterm zone="udev-get-sys-path"><primary sortas="get_sys_path">udev_get_sys_path</primary></indexterm><programlisting>const <link linkend="char">char</link> *        udev_get_sys_path                   (<link linkend="struct-udev">struct udev</link> *udev);</programlisting>
+<para>
+Retrieve the sysfs mount point. The default is "/sys". For
+testing purposes, it can be overridden with the environment
+variable SYSFS_PATH.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>udev</parameter>&#160;:</term>
+<listitem><simpara> udev library context
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> the sys mount point
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="udev-get-dev-path" role="function">
+<title>udev_get_dev_path ()</title>
+<indexterm zone="udev-get-dev-path"><primary sortas="get_dev_path">udev_get_dev_path</primary></indexterm><programlisting>const <link linkend="char">char</link> *        udev_get_dev_path                   (<link linkend="struct-udev">struct udev</link> *udev);</programlisting>
+<para>
+Retrieve the device directory path. The default value is "/dev",
+the actual value may be overridden in the udev configuration
+file.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>udev</parameter>&#160;:</term>
+<listitem><simpara> udev library context
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> the device directory path
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="udev-get-userdata" role="function">
+<title>udev_get_userdata ()</title>
+<indexterm zone="udev-get-userdata"><primary sortas="get_userdata">udev_get_userdata</primary></indexterm><programlisting><link linkend="void">void</link> *              udev_get_userdata                   (<link linkend="struct-udev">struct udev</link> *udev);</programlisting>
+<para>
+Retrieve stored data pointer from library context. This might be useful
+to access from callbacks.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>udev</parameter>&#160;:</term>
+<listitem><simpara> udev library context
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> stored userdata
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="udev-set-userdata" role="function">
+<title>udev_set_userdata ()</title>
+<indexterm zone="udev-set-userdata"><primary sortas="set_userdata">udev_set_userdata</primary></indexterm><programlisting><link linkend="void">void</link>                udev_set_userdata                   (<link linkend="struct-udev">struct udev</link> *udev,
+                                                         <link linkend="void">void</link> *userdata);</programlisting>
+<para>
+Store custom <parameter>userdata</parameter> in the library context.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>udev</parameter>&#160;:</term>
+<listitem><simpara> udev library context
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>userdata</parameter>&#160;:</term>
+<listitem><simpara> data pointer
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

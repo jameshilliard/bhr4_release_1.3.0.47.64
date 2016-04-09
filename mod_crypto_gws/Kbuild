@@ -1,0 +1,3 @@
+obj-m := mod_crypto_gws.o
+mod_crypto_gws-y := crypto_gws.o crypto_gws_logic.o
+EXTRA_CFLAGS := -Wno-comment

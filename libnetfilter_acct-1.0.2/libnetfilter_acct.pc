@@ -1,0 +1,15 @@
+# libnetfilter_acct pkg-config file
+
+prefix=
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: libnetfilter_acct
+Description: Netfilter extended accounting infrastructure library
+URL: http://netfilter.org/projects/libnetfilter_acct/
+Version: 1.0.2
+Requires:
+Conflicts:
+Libs: -L${libdir} -lnetfilter_acct
+Cflags: -I${includedir}

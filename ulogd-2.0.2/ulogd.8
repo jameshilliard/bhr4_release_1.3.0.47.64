@@ -1,0 +1,79 @@
+.\"                                      Hey, EMACS: -*- nroff -*-
+.\" First parameter, NAME, should be all caps
+.\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
+.\" other parameters are allowed: see man(7), man(1)
+.TH ULOGD 8 "February 20, 2013" "Linux Netfilter"
+.\" Please adjust this date whenever revising the manpage.
+.\"
+.\" Some roff macros, for reference:
+.\" .nh        disable hyphenation
+.\" .hy        enable hyphenation
+.\" .ad l      left justify
+.\" .ad b      justify to both left and right margins
+.\" .nf        disable filling
+.\" .fi        enable filling
+.\" .br        insert line break
+.\" .sp <n>    insert n+1 empty lines
+.\" for manpage-specific macros, see man(7)
+.SH NAME
+ulogd \- netfilter/iptables logging daemon
+.SH SYNOPSIS
+.B ulogd [options]
+.SH DESCRIPTION
+.B ulogd
+is a logging daemon that reads event messages coming from the Netfilter 
+connection tracking, the Netfilter packet logging subsystem and from
+the Netfilter accounting subsystem. You have to enable support for
+connection tracking event delivery; ctnetlink and the NFLOG target in
+your Linux kernel 2.6.x or load their respective modules. The deprecated
+ULOG target (which has been superseded by NFLOG) is also
+supported.
+.PP
+The received messages can be logged into files or into a mySQL, sqlite3
+or PostgreSQL database. IPFIX and Graphite output are also supported.
+.SH OPTIONS
+.TP
+.B -d, --daemon
+fork ulogd into background (start as daemon)
+.TP
+.B -c <filename>, --configfile <filename>
+use <filename> as configuration file instead of
+.I /etc/ulogd.conf
+.TP
+.B -h, --help
+show usage information
+.TP
+.B -V, --version
+show version information and copyright
+.TP
+.B -v, --verbose
+verbose output on stdout when not running as daemon
+.TP
+.B -l, --loglevel <level>
+set log level to <level>: debug(1), info(3), notice(5), error(7) or fatal(8) (default 5)
+.TP
+.B -u <UID>, --uid <UID>
+change UID/GID
+.TP
+.B -i <pluginpath>, --info <pluginpath>
+display infos about plugin
+.SH FILES
+.I /etc/ulogd.conf
+.br
+.I /var/log/ulogd.log
+.SH SEE ALSO
+There is more documentation about the daemon and the database plugins
+(including examples) in the directories
+.nf 
+.br 
+.I /usr/share/doc/ulogd 
+.br 
+.fi
+.I /usr/share/doc/ulogd-mysql
+and
+.nf 
+.br
+.I /usr/share/doc/ulogd-pgsql
+.SH AUTHOR
+This manual page was written by Joerg Wendland <joergland@debian.org>,
+for the Debian GNU/Linux system (but may be used by others).

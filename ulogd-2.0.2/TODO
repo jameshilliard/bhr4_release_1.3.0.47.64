@@ -1,0 +1,4 @@
+- add support for capabilities to run as non-root
+- support for static linking
+- issues with ulogd_BASE and partially copied packets (--ulog-cprange)
+- problem wrt. ulogd_BASE and fragments

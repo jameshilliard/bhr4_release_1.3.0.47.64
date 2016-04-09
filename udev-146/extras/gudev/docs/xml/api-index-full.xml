@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE indexdiv PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd" [
+<!ENTITY version SYSTEM "version.xml">
+]>
+<indexdiv>
+<indexdiv><title>G</title>
+<indexentry><primaryie linkends="GUdevClient-struct"><link linkend="GUdevClient">GUdevClient</link></primaryie></indexentry>
+<indexentry><primaryie linkends="GUdevClient-uevent"><link linkend="GUdevClient-uevent">GUdevClient::uevent</link></primaryie></indexentry>
+<indexentry><primaryie linkends="GUdevClient--subsystems"><link linkend="GUdevClient--subsystems">GUdevClient:subsystems</link></primaryie></indexentry>
+<indexentry><primaryie linkends="GUdevClientClass"><link linkend="GUdevClientClass">GUdevClientClass</link></primaryie></indexentry>
+<indexentry><primaryie linkends="GUdevDevice-struct"><link linkend="GUdevDevice">GUdevDevice</link></primaryie></indexentry>
+<indexentry><primaryie linkends="GUdevDeviceClass"><link linkend="GUdevDeviceClass">GUdevDeviceClass</link></primaryie></indexentry>
+<indexentry><primaryie linkends="GUdevDeviceNumber"><link linkend="GUdevDeviceNumber">GUdevDeviceNumber</link></primaryie></indexentry>
+<indexentry><primaryie linkends="GUdevDeviceType"><link linkend="GUdevDeviceType">GUdevDeviceType</link></primaryie></indexentry>
+<indexentry><primaryie linkends="g-udev-client-new"><link linkend="g-udev-client-new">g_udev_client_new</link></primaryie></indexentry>
+<indexentry><primaryie linkends="g-udev-client-query-by-device-file"><link linkend="g-udev-client-query-by-device-file">g_udev_client_query_by_device_file</link></primaryie></indexentry>
+<indexentry><primaryie linkends="g-udev-client-query-by-device-number"><link linkend="g-udev-client-query-by-device-number">g_udev_client_query_by_device_number</link></primaryie></indexentry>
+<indexentry><primaryie linkends="g-udev-client-query-by-subsystem"><link linkend="g-udev-client-query-by-subsystem">g_udev_client_query_by_subsystem</link></primaryie></indexentry>
+<indexentry><primaryie linkends="g-udev-client-query-by-subsystem-and-name"><link linkend="g-udev-client-query-by-subsystem-and-name">g_udev_client_query_by_subsystem_and_name</link></primaryie></indexentry>
+<indexentry><primaryie linkends="g-udev-client-query-by-sysfs-path"><link linkend="g-udev-client-query-by-sysfs-path">g_udev_client_query_by_sysfs_path</link></primaryie></indexentry>
+<indexentry><primaryie linkends="g-udev-device-get-action"><link linkend="g-udev-device-get-action">g_udev_device_get_action</link></primaryie></indexentry>
+<indexentry><primaryie linkends="g-udev-device-get-device-file"><link linkend="g-udev-device-get-device-file">g_udev_device_get_device_file</link></primaryie></indexentry>
+<indexentry><primaryie linkends="g-udev-device-get-device-file-symlinks"><link linkend="g-udev-device-get-device-file-symlinks">g_udev_device_get_device_file_symlinks</link></primaryie></indexentry>
+<indexentry><primaryie linkends="g-udev-device-get-device-number"><link linkend="g-udev-device-get-device-number">g_udev_device_get_device_number</link></primaryie></indexentry>
+<indexentry><primaryie linkends="g-udev-device-get-device-type"><link linkend="g-udev-device-get-device-type">g_udev_device_get_device_type</link></primaryie></indexentry>
+<indexentry><primaryie linkends="g-udev-device-get-devtype"><link linkend="g-udev-device-get-devtype">g_udev_device_get_devtype</link></primaryie></indexentry>
+<indexentry><primaryie linkends="g-udev-device-get-driver"><link linkend="g-udev-device-get-driver">g_udev_device_get_driver</link></primaryie></indexentry>
+<indexentry><primaryie linkends="g-udev-device-get-name"><link linkend="g-udev-device-get-name">g_udev_device_get_name</link></primaryie></indexentry>
+<indexentry><primaryie linkends="g-udev-device-get-number"><link linkend="g-udev-device-get-number">g_udev_device_get_number</link></primaryie></indexentry>
+<indexentry><primaryie linkends="g-udev-device-get-parent"><link linkend="g-udev-device-get-parent">g_udev_device_get_parent</link></primaryie></indexentry>
+<indexentry><primaryie linkends="g-udev-device-get-parent-with-subsystem"><link linkend="g-udev-device-get-parent-with-subsystem">g_udev_device_get_parent_with_subsystem</link></primaryie></indexentry>
+<indexentry><primaryie linkends="g-udev-device-get-property"><link linkend="g-udev-device-get-property">g_udev_device_get_property</link></primaryie></indexentry>
+<indexentry><primaryie linkends="g-udev-device-get-property-as-boolean"><link linkend="g-udev-device-get-property-as-boolean">g_udev_device_get_property_as_boolean</link></primaryie></indexentry>
+<indexentry><primaryie linkends="g-udev-device-get-property-as-double"><link linkend="g-udev-device-get-property-as-double">g_udev_device_get_property_as_double</link></primaryie></indexentry>
+<indexentry><primaryie linkends="g-udev-device-get-property-as-int"><link linkend="g-udev-device-get-property-as-int">g_udev_device_get_property_as_int</link></primaryie></indexentry>
+<indexentry><primaryie linkends="g-udev-device-get-property-as-strv"><link linkend="g-udev-device-get-property-as-strv">g_udev_device_get_property_as_strv</link></primaryie></indexentry>
+<indexentry><primaryie linkends="g-udev-device-get-property-as-uint64"><link linkend="g-udev-device-get-property-as-uint64">g_udev_device_get_property_as_uint64</link></primaryie></indexentry>
+<indexentry><primaryie linkends="g-udev-device-get-property-keys"><link linkend="g-udev-device-get-property-keys">g_udev_device_get_property_keys</link></primaryie></indexentry>
+<indexentry><primaryie linkends="g-udev-device-get-seqnum"><link linkend="g-udev-device-get-seqnum">g_udev_device_get_seqnum</link></primaryie></indexentry>
+<indexentry><primaryie linkends="g-udev-device-get-subsystem"><link linkend="g-udev-device-get-subsystem">g_udev_device_get_subsystem</link></primaryie></indexentry>
+<indexentry><primaryie linkends="g-udev-device-get-sysfs-attr"><link linkend="g-udev-device-get-sysfs-attr">g_udev_device_get_sysfs_attr</link></primaryie></indexentry>
+<indexentry><primaryie linkends="g-udev-device-get-sysfs-attr-as-boolean"><link linkend="g-udev-device-get-sysfs-attr-as-boolean">g_udev_device_get_sysfs_attr_as_boolean</link></primaryie></indexentry>
+<indexentry><primaryie linkends="g-udev-device-get-sysfs-attr-as-double"><link linkend="g-udev-device-get-sysfs-attr-as-double">g_udev_device_get_sysfs_attr_as_double</link></primaryie></indexentry>
+<indexentry><primaryie linkends="g-udev-device-get-sysfs-attr-as-int"><link linkend="g-udev-device-get-sysfs-attr-as-int">g_udev_device_get_sysfs_attr_as_int</link></primaryie></indexentry>
+<indexentry><primaryie linkends="g-udev-device-get-sysfs-attr-as-strv"><link linkend="g-udev-device-get-sysfs-attr-as-strv">g_udev_device_get_sysfs_attr_as_strv</link></primaryie></indexentry>
+<indexentry><primaryie linkends="g-udev-device-get-sysfs-attr-as-uint64"><link linkend="g-udev-device-get-sysfs-attr-as-uint64">g_udev_device_get_sysfs_attr_as_uint64</link></primaryie></indexentry>
+<indexentry><primaryie linkends="g-udev-device-get-sysfs-path"><link linkend="g-udev-device-get-sysfs-path">g_udev_device_get_sysfs_path</link></primaryie></indexentry>
+<indexentry><primaryie linkends="g-udev-device-has-property"><link linkend="g-udev-device-has-property">g_udev_device_has_property</link></primaryie></indexentry>
+</indexdiv>
+</indexdiv>

@@ -1,0 +1,62 @@
+ 
+ void PLUGIN_INIT_NAME(server_info) (cherokee_plugin_loader_t *loader); 
+ void PLUGIN_INIT_NAME(file) (cherokee_plugin_loader_t *loader); 
+ void PLUGIN_INIT_NAME(dirlist) (cherokee_plugin_loader_t *loader); 
+ void PLUGIN_INIT_NAME(cgi) (cherokee_plugin_loader_t *loader); 
+ void PLUGIN_INIT_NAME(fcgi) (cherokee_plugin_loader_t *loader); 
+ void PLUGIN_INIT_NAME(redir) (cherokee_plugin_loader_t *loader); 
+ void PLUGIN_INIT_NAME(common) (cherokee_plugin_loader_t *loader); 
+ void PLUGIN_INIT_NAME(gzip) (cherokee_plugin_loader_t *loader); 
+ void PLUGIN_INIT_NAME(deflate) (cherokee_plugin_loader_t *loader); 
+ void PLUGIN_INIT_NAME(ncsa) (cherokee_plugin_loader_t *loader); 
+ void PLUGIN_INIT_NAME(combined) (cherokee_plugin_loader_t *loader); 
+ void PLUGIN_INIT_NAME(round_robin) (cherokee_plugin_loader_t *loader); 
+ void PLUGIN_INIT_NAME(directory) (cherokee_plugin_loader_t *loader); 
+ void PLUGIN_INIT_NAME(extensions) (cherokee_plugin_loader_t *loader); 
+ void PLUGIN_INIT_NAME(header) (cherokee_plugin_loader_t *loader); 
+ void PLUGIN_INIT_NAME(tls) (cherokee_plugin_loader_t *loader); 
+ void PLUGIN_INIT_NAME(libssl) (cherokee_plugin_loader_t *loader); 
+ void PLUGIN_INIT_NAME(not) (cherokee_plugin_loader_t *loader); 
+ void PLUGIN_INIT_NAME(and) (cherokee_plugin_loader_t *loader); 
+
+  
+ add_static_entry (loader, "server_info", PLUGIN_INFO_PTR(server_info)); 
+ add_static_entry (loader, "file", PLUGIN_INFO_PTR(file)); 
+ add_static_entry (loader, "dirlist", PLUGIN_INFO_PTR(dirlist)); 
+ add_static_entry (loader, "cgi", PLUGIN_INFO_PTR(cgi)); 
+ add_static_entry (loader, "fcgi", PLUGIN_INFO_PTR(fcgi)); 
+ add_static_entry (loader, "redir", PLUGIN_INFO_PTR(redir)); 
+ add_static_entry (loader, "common", PLUGIN_INFO_PTR(common)); 
+ add_static_entry (loader, "gzip", PLUGIN_INFO_PTR(gzip)); 
+ add_static_entry (loader, "deflate", PLUGIN_INFO_PTR(deflate)); 
+ add_static_entry (loader, "ncsa", PLUGIN_INFO_PTR(ncsa)); 
+ add_static_entry (loader, "combined", PLUGIN_INFO_PTR(combined)); 
+ add_static_entry (loader, "round_robin", PLUGIN_INFO_PTR(round_robin)); 
+ add_static_entry (loader, "directory", PLUGIN_INFO_PTR(directory)); 
+ add_static_entry (loader, "extensions", PLUGIN_INFO_PTR(extensions)); 
+ add_static_entry (loader, "header", PLUGIN_INFO_PTR(header)); 
+ add_static_entry (loader, "tls", PLUGIN_INFO_PTR(tls)); 
+ add_static_entry (loader, "libssl", PLUGIN_INFO_PTR(libssl)); 
+ add_static_entry (loader, "not", PLUGIN_INFO_PTR(not)); 
+ add_static_entry (loader, "and", PLUGIN_INFO_PTR(and)); 
+
+  
+ PLUGIN_INIT_NAME(server_info)(loader); 
+ PLUGIN_INIT_NAME(file)(loader); 
+ PLUGIN_INIT_NAME(dirlist)(loader); 
+ PLUGIN_INIT_NAME(cgi)(loader); 
+ PLUGIN_INIT_NAME(fcgi)(loader); 
+ PLUGIN_INIT_NAME(redir)(loader); 
+ PLUGIN_INIT_NAME(common)(loader); 
+ PLUGIN_INIT_NAME(gzip)(loader); 
+ PLUGIN_INIT_NAME(deflate)(loader); 
+ PLUGIN_INIT_NAME(ncsa)(loader); 
+ PLUGIN_INIT_NAME(combined)(loader); 
+ PLUGIN_INIT_NAME(round_robin)(loader); 
+ PLUGIN_INIT_NAME(directory)(loader); 
+ PLUGIN_INIT_NAME(extensions)(loader); 
+ PLUGIN_INIT_NAME(header)(loader); 
+ PLUGIN_INIT_NAME(tls)(loader); 
+ PLUGIN_INIT_NAME(libssl)(loader); 
+ PLUGIN_INIT_NAME(not)(loader); 
+ PLUGIN_INIT_NAME(and)(loader);

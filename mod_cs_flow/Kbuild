@@ -1,0 +1,3 @@
+obj-m := mod_cs_flow.o
+mod_cs_flow-y := cs_flow.o
+EXTRA_CFLAGS := -Wno-comment

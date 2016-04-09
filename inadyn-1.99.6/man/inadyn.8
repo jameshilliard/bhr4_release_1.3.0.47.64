@@ -1,0 +1,413 @@
+.\"  -*- nroff -*-
+.\"
+.\" Process this file with
+.\" groff -man -Tascii foo.1
+.\"
+.\" Copyright (C) 2004       Shaul Karl.
+.\" Copyright (C) 2010-2013  Joachim Nilsson.
+.\"
+.\" You may modify and distribute this document for any purpose, as
+.\" long as this copyright notice remains intact.
+.\"
+.Dd November 27, 2013
+.Dt INADYN 8 SMM
+.Os
+.Sh NAME
+.Nm inadyn
+.Nd a small DDNS client to maintain your presence on the Internet
+.Sh SYNOPSIS
+.Nm inadyn
+.Op Fl a, -alias Ar ALIAS
+.Op Fl b, -background
+.Op Fl B, -bind Ar IFNAME
+.Op Fl d, -drop-privs Ar USER Ns Op : Ns Ar GROUP
+.Op Fl e, -exec Ar SCRIPT
+.Op Fl f, -forced-update Ar SEC
+.Op Fl F, -config Ar FILE
+.Op Fl L, -logfile Ar FILE
+.Op Fl P, -pidfile Ar FILE
+.Op Fl c, -cachefile Ar FILE
+.Op Fl s, -syslog
+.Op Fl h, -help
+.Op Fl i, -iface Ar IFNAME
+.Op Fl n, -iterations Ar NUM
+.Op Fl H, -checkip-url Ar SERVER Ns Oo : Ns Ar PORT Oc Ar URL
+.Op Fl N, -server-name Ar SERVER Ns Op : Ns Ar PORT
+.Op Fl U, -server-url Ar PATH
+.Op Fl S, -system Ar PROVIDER
+.Op Fl o, -once
+.Op Fl t, -startup-delay Ar SEC
+.Op Fl T, -period Ar SEC
+.Op Fl u, -username Ar USERNAME
+.Op Fl p, -password Ar PASSWORD
+.Op Fl v, -version
+.Op Fl V, -verbose Ar LEVEL
+.Op Fl w, -wildcard
+.Op Fl x, -proxy-server Ar SERVER Ns Op : Ns Ar PORT
+.Sh DESCRIPTION
+.Nm
+is a client for
+.Dq open
+name servers, also known as DDNS service providers.  That is,
+it lets you have a public Internet name for your DHCP/PPPoE assigned system.  Some of
+these services are free of charge for non-commercial use, others take a small fee,
+but also provide more domains to choose from.
+.Pp
+Common DDNS service providers supported by
+.Nm
+.Pp
+.Bl -bullet -compact
+.It
+http://www.dyndns.org
+.It
+http://freedns.afraid.org
+.It
+http://zoneedit.com
+.It
+http://www.no-ip.com
+.It
+http://www.easydns.com
+.It
+http://www.tzo.com
+.It
+http://www.3322.org
+.It
+http://www.dnsomatic.com
+.It
+http://www.tunnelbroker.net
+.It
+http://dns.he.net/
+.It
+http://www.dynsip.org
+.It
+http://www.sitelutions.com
+.It
+http://www.dnsexit.com
+.It
+http://www.changeip.com
+.El
+.Pp
+The basic operation of
+.Nm inadyn
+is to periodically check whether the actual Internet accessible IP of your system is
+the same one that is recorded in the name server, and update the name server records
+when there is a mismatch.
+.Sh OPTIONS
+.Bl -tag -width Ds
+.It Fl h, -help
+Print a summary of the options and exit
+.It Fl u, -username Ar USERNAME
+The username, if applicable. This might be referred to as hash
+.It Fl p, -password Ar PASSWORD
+The password, if applicable
+.It Fl a, -alias Ar ALIAS
+A host name alias. This option can appear multiple times, for each
+domain that has the same IP
+.It Fl F, -config Ar FILE
+The file name that contains
+.Nm inadyn
+command options exactly as specified in the
+command line syntax (adds to those already present on the cmd line). The default
+configuration file name,
+.Pa /etc/inadyn.conf ,
+is looked at automatically if
+.Nm inadyn
+is called without any command line options. The format is as expected
+for a UNIX config file; the hash character is used to comment entire
+lines.  Spaces are ingored.  The long options may be specified without
+\-\- if placed at the beginning of the line
+.It Fl H, -checkip-url Ar SERVER Ns Oo : Ns Ar PORT Oc Ar PATH
+Detect IP address by calling
+.Ar PATH
+from this
+.Ar SERVER Ns Oo : Ns Ar PORT Oc .
+Default: http://checkip.dyndns.org
+.It Fl N, -server-name Ar SERVER Ns Op : Ns Ar PORT
+The server that receives the update DNS requests.  When no proxy is specified it is
+sufficient to set the
+.Fl -system
+option so that the default servers will be taken. The
+option is useful for generic DynDNS services that support HTTP update.
+.It Fl U, -server-url Ar PATH
+The update path on the DynDNS server.
+.It Fl S, -system Ar email@ddns-service.tld
+DNS service to connect to.  Defaults to
+.Ar default@dyndns.org .
+.Bl -tag -width TERM -compact -offset indent
+.It Cm default@dyndns.org
+http://www.dyndns.org
+.It Cm default@freedns.afraid.org
+http://freedns.afraid.org
+.It Cm default@zoneedit.com
+http://zoneedit.com
+.It Cm default@no-ip.com
+http://www.no-ip.com
+.It Cm default@easydns.com
+http://www.easydns.com
+.It Cm default@tzo.com
+http://www.tzo.com
+.It Cm dyndns@3322.org
+http://www.3322.org
+.It Cm default@dnsomatic.com
+http://www.dnsomatic.com
+.It Cm ipv6tb@he.net
+http://www.tunnelbroker.net
+.It Cm dyndns@he.net
+http://dns.he.net/
+.It Cm default@dynsip.org
+http://www.dynsip.org
+.It Cm default@sitelutions.com
+http://www.sitelutions.com
+.It Cm default@dnsexit.com
+http://www.dnsexit.com
+.It Cm default@changeip.com
+http://www.changeip.com
+.It Cm custom@http_srv_basic_auth
+Try this if your DDNS service provider is not listed
+.El
+.It Fl x, -proxy-server Ar SERVER Ns Op : Ns Ar PORT
+HTTP proxy server name and port.  Default: None
+.It Fl T, -period Ar SEC
+How often the IP is checked, in seconds. Default: apx 1 minute. Max: 10 days.
+.It Fl f, -forced-update Ar SEC
+How often the IP should be updated even if it is not changed. The time
+should be given in seconds.  Default is equal to 30 days.
+.It Fl L, -logfile Ar FILE
+The name, including the full path, of a log file.  See also the
+.Fl --syslog
+option, below.
+.It Fl b, -background
+Run in background. Output is sent to the UNIX syslog facilities
+or to a log file, if one was specified.
+.It Fl V, -verbose Ar LEVEL
+Set the debug level, which is an integer between
+.Ar 0
+to
+.Ar 5 .
+.It Fl n, -iterations Ar NUM
+Set the number of DNS updates. The default is
+.Ar 0 ,
+which means infinity.
+.It Fl s, -syslog
+Use the system
+.Xr syslog 3
+mechanism for log messages, warnings and error conditions.
+.It Fl d, -drop-privs Ar USER Ns Op : Ns Ar GROUP
+Drop privileges after initial setup to the given user and group.
+.It Fl B, -bind Ar IFNAME
+Set interface to bind to. Only on UNIX systems.
+.It Fl i, -iface Ar IFNAME
+Set interface to check for IP. Only on UNIX systems.
+External IP check is not performed
+.It Fl P, -pidfile Ar FILE
+Set pidfile, defaults to
+.Pa /var/run/inadyn/inadyn.pid 
+.It Fl c, -cachefile Ar FILE
+Set cache file, defaults to
+.Pa /var/run/inadyn/inadyn.cache 
+.Pp
+The cache file is used to keep track of what address has been sent to
+the DDNS provider and resulted in a successful update.  Hence it is only
+written when a successful update has been made.
+.Pp
+However, to protect against too frequent updates, that may be caused by
+inadyn being completely restarted, the absence of a cache file does not
+in itself cause an update.  Instead, each alias is queried for using a
+DNS lookup for each alias entry.  This IP is then compared to the IP
+returned by the DDNS providers 'checkip' service.
+.It Fl e, -exec Ar SCRIPT
+Full path to external command, or script, to run after a successful
+DDNS update
+.Ar SCRIPT
+can use following environment variables: INADYN_IP,
+INADYN_HOSTNAME. First environment variable contains new IP address,
+second one - host name alias. INADYN_IFACE is available, if
+.Fl -iface
+option used.
+.It Fl w, -wildcard
+Enable domain name wildcarding for easydns.com. Default
+disabled. For
+.Nm inadyn
+< 1.96.3 wildcarding was enabled by default
+.It Fl t, -startup-delay Ar SEC
+Initial delay at program startup.  Default is 0 seconds.  Any signal can
+be used to abort the startup delay early, but SIGUSR2 is the recommended
+to use.  See
+.Sx SIGNALS
+below for full details of how
+.Nm
+responds to signals.
+.Pp
+Intended to allow time for embedded devices without a battery backed
+real time clock to set their clock via NTP at bootup.  This is so that
+the time since the last update can be calculated correctly from the
+cache file and the
+.Fl -forced-update
+option honored across reboots, avoiding unnecessary IP address updates
+.It Fl o, -once
+Force one update and quit
+.It Fl z, -fake-address
+When using SIGUSR1, to do a forced update, this option can be used to
+fake an address update using the
+.Dq random
+address 203.0.113.42 (example IP address from RFC5737) before updating
+with the actual IP address.  This is completely outside spec., but can
+be useful for people who very rarely, if ever, get an IP address change.
+Because some DDNS service providers will not register even a forced
+update if the IP is the same.  As a result the user will likely be
+deregistered as an inactive user.
+.El
+.Sh "TYPICAL USAGE"
+.Ss http://www.dyndns.org
+.Bl -column -compact
+.It Nm
+.Fl u
+nick
+.Fl p
+secret
+.Fl a
+my.registered.name
+.It Nm
+.Fl u
+nick
+.Fl p
+secret
+.Fl T 60
+.Fl a
+test.homeip.net
+.Fl a
+my.second.domain
+.It Nm
+.Fl b
+.Fl u
+nick
+.Fl p
+secret
+.Fl T
+60
+.Fl a
+test.homeip.net
+.Fl a
+my.second.domain
+.Fl L inadyn.log
+.El
+.Ss http://freedns.afraid.org
+.Bl -column -compact
+.It Nm
+.Fl S
+default@freedns.afraid.org
+.Fl u
+nick
+.Fl p
+secret
+.Fl a
+my.registered.name
+.It Nm
+.Fl S
+default@freedns.afraid.org
+.Fl u
+nick
+.Fl p
+secret
+.Fl T
+60
+.Fl a
+test.homeip.net
+.Fl a
+my.second.domain
+.El
+.Pp
+The
+.Dq hash
+is automatically retrieved by
+.Nm inadyn
+using the freedns API.
+.Sh OUTPUT
+.Nm
+prints a message when the IP is updated.  If no update is needed then by
+default it prints a single
+.Dq .\&
+character, unless
+.Fl -verbose
+is set to
+.Ar 0 .
+Therefore, unless
+.Fl -verbose
+is set to
+.Ar 0 ,
+the log file will contains lot
+of dots. When the connection goes down it could be that
+.Nm
+will print some error messages. Those are harmless and should be
+followed by
+.Dq OK
+messages after the connection is back up.
+.Sh SIGNALS
+.Nm
+responds to the following signals:
+.Pp
+.Bl -tag -width TERM -compact
+.It HUP
+Reload the
+.Nm .conf 
+file, standard UNIX behavior.
+.It TERM
+Tell
+.Nm
+to exit gracefully.
+.It INT
+Same as TERM.
+.It USR1
+Force update now, even if the IP address has not changed.
+.It USR2
+Check IP address change now. Useful when a new DHCP/PPPoE lease or new
+gateway is received.  Please note that
+.Nm
+does not track such events by itself.  You need an external monitor for
+that.
+.El
+.Pp
+For convenience in sending signals,
+.Nm
+writes its process ID to
+.Pa /var/run/inadyn/inadyn.pid
+.Sh FILES
+.Bl -tag -width /var/run/inadyn/inadyn.cache -compact
+.It Pa /etc/inadyn.conf
+.It Pa /var/run/inadyn/inadyn.cache
+.It Pa /var/run/inadyn/inadyn.pid
+.El
+.Sh SEE ALSO
+.Xr inadyn.conf 5
+.Pp
+The
+.Nm
+home page is http://github.com/troglobit/inadyn
+.Sh AUTHORS
+.Nm
+was written by
+.Bl -bullet -compact
+.It
+Narcis Ilisei
+.Pa inarcis2002@hotpop.com
+.It
+Steve Horbachuk, and later
+.It
+Joachim Nilsson
+.Pa troglobit@gmail.com
+with a lot of help from
+.It
+Andrey Tikhomirov, and
+.It
+Mike Fleetwood
+.El
+.Pp
+This manual page was initially written for the
+.Em Debian GNU/Linux
+system by
+.An -nosplit
+.An Shaul Karl Aq shaul@debian.org .
+Currently maintained by
+.An -nosplit
+.An Joachim Nilsson Aq troglobit@gmail.com .
+

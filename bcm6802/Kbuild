@@ -1,0 +1,3 @@
+obj-m := bcm6802.o
+bcm6802-y := bmoca.o bbsi.o
+EXTRA_CFLAGS := -I/home/jenkins/slave/workspace/BHR4_Release_Build_FiOS1.3_PROD/thirdparty/bcm6802/bmoca
